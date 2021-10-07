@@ -1,6 +1,7 @@
 package site.laomst.dsag.algo.sort;
 
 import org.junit.jupiter.api.Test;
+import site.laomst.dsag.Util.ArrayUtil;
 
 import java.util.Arrays;
 
@@ -30,7 +31,8 @@ public class BubbleSort {
 
     @Test
     public void sortTest() {
-        int[] a = {17, 3, 1, 9, 23, 78};
+        int[] a = ArrayUtil.genIntArray();
+        System.out.println(Arrays.toString(a));
         sort(a);
         System.out.println(Arrays.toString(a));
     }
@@ -73,7 +75,8 @@ public class BubbleSort {
 
     @Test
     public void sort2Test() {
-        int[] a = {17, 3, 1, 9, 23, 78};
+        int[] a = ArrayUtil.genIntArray();
+        System.out.println(Arrays.toString(a));
         sort2(a);
         System.out.println(Arrays.toString(a));
     }
@@ -100,7 +103,8 @@ public class BubbleSort {
 
     @Test
     public void sortBubbleDownTest() {
-        int[] a = {17, 3, 1, 9, 23, 78};
+        int[] a = ArrayUtil.genIntArray();
+        System.out.println(Arrays.toString(a));
         sortBubbleDown(a);
         System.out.println(Arrays.toString(a));
     }

@@ -28,6 +28,7 @@ public class InsertionSort {
     @Test
     public void sortTest() {
         int[] a = ArrayUtil.genIntArray();
+        System.out.println(Arrays.toString(a));
         sort(a);
         System.out.println(Arrays.toString(a));
     }
