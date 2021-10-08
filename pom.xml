@@ -3,19 +3,11 @@
         xmlns="http://maven.apache.org/POM/4.0.0"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>
-        4.0.0
-    </modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>
-        site.laomst
-    </groupId>
-    <artifactId>
-        DataStructuresAndAlgorithmsInJava
-    </artifactId>
-    <version>
-        1.0-SNAPSHOT
-    </version>
+    <groupId>site.laomst</groupId>
+    <artifactId>data-structures-and-algorithms-in-java</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -26,28 +18,16 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>
-                org.junit.jupiter
-            </groupId>
-            <artifactId>
-                junit-jupiter
-            </artifactId>
-            <version>
-                RELEASE
-            </version>
-            <scope>
-                compile
-            </scope>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
     <properties>
-        <maven.compiler.source>
-            8
-        </maven.compiler.source>
-        <maven.compiler.target>
-            8
-        </maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
 </project>
