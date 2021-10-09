@@ -1,4 +1,4 @@
-package site.laomst.dsag.Util;
+package site.laomst.learn.dsag.Util;
 
 public class ArrayUtil {
     public static int[] genIntArray() {

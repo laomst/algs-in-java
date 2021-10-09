@@ -1,4 +1,4 @@
-package site.laomst.dsag;
+package site.laomst.learn.dsag;
 
 import java.util.Arrays;
 
