@@ -1,7 +1,7 @@
 package site.laomst.learn.dsag.algo.sort;
 
 import org.junit.jupiter.api.Test;
-import site.laomst.learn.dsag.Util.ArrayUtil;
+import site.laomst.learn.dsag.util.ArrayUtil;
 
 import java.util.Arrays;
 
@@ -22,6 +22,7 @@ public class QuickSort {
         int pivot = a[end];
         // 用一个i，记录pivot的位置
         int i = start;
+
         for (int j = start; j <= end - 1; j++) {
             if (a[j] < pivot) {
                 ArrayUtil.swap(a, i, j);
@@ -29,6 +30,7 @@ public class QuickSort {
             }
         }
 
+        // 把 pivot 放到应该的位置上
         ArrayUtil.swap(a, end, i);
 
         sort(a, start, i - 1);

@@ -1,7 +1,7 @@
 package site.laomst.learn.dsag.algo.sort;
 
 import org.junit.jupiter.api.Test;
-import site.laomst.learn.dsag.Util.ArrayUtil;
+import site.laomst.learn.dsag.util.ArrayUtil;
 
 import java.util.Arrays;
 
