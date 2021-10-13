@@ -2,10 +2,12 @@ package site.laomst.learn.dsag.algo.sort;
 
 import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.util.ArrayUtil;
+import site.laomst.learn.dsag.util.Best;
 
 import java.util.Arrays;
 
 public class QuickSort {
+    @Best
     public static void sort(int[] a) {
         if (a == null || a.length <= 1) {
             return;

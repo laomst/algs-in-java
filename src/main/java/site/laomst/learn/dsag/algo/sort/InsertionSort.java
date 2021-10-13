@@ -2,24 +2,28 @@ package site.laomst.learn.dsag.algo.sort;
 
 import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.util.ArrayUtil;
+import site.laomst.learn.dsag.util.Best;
 
 import java.util.Arrays;
 
 public class InsertionSort {
+
+    @Best
     public static void sort(int[] a) {
         if (a == null || a.length <= 1) {
             return;
         }
-        for (int i = 1; i < a.length; i++) {
+        for (int i = 0; i < a.length; i++) {
+            // 记录需要插入的值value
             int value = a[i];
+            // j 用来记录 value 需要插入的位置
             int j = i - 1;
-            while (j >= 0) {
+            for (; j >= 0; j--) {
                 if (a[j] > value) {
                     a[j + 1] = a[j];
                 } else {
                     break;
                 }
-                j--;
             }
             a[j + 1] = value;
         }

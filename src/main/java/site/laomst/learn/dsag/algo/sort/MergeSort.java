@@ -2,6 +2,7 @@ package site.laomst.learn.dsag.algo.sort;
 
 import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.util.ArrayUtil;
+import site.laomst.learn.dsag.util.Best;
 
 import java.util.Arrays;
 
@@ -65,6 +66,7 @@ public class MergeSort {
      * 优化，不是每次都申请一个新的临时数组，而是开头直接申请一个和原数组一样大小的临时数组，供下面使用
      * @param a
      */
+    @Best
     public static void sort2(int[] a) {
         if (a == null || a.length <= 1) {
             return;
