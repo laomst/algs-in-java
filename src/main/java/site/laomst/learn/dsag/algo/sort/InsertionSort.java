@@ -16,7 +16,7 @@ public class InsertionSort {
         for (int i = 0; i < a.length; i++) {
             // 记录需要插入的值value
             int value = a[i];
-            // j 用来记录 value 需要插入的位置
+            // j 用来记录 value 需要插入的位置, 从有序区的尾部向前查找插入位置
             int j = i - 1;
             for (; j >= 0; j--) {
                 if (a[j] > value) {
@@ -37,10 +37,10 @@ public class InsertionSort {
         System.out.println(Arrays.toString(a));
     }
 
-    //            if (i - j >= 0) {
-    //                System.arraycopy(a, j, a, j + 1, i - j);
-    //            }
-//    从前到后搜寻插入位置
+    /**
+     * 插入排序实现2，从有序区的前面查找插入位置
+     * @param a
+     */
     public static void sort2(int[] a) {
         if (a == null || a.length <= 1) {
             return;
@@ -70,7 +70,7 @@ public class InsertionSort {
     }
 
     /**
-     * 从前到后查找插入位置实现2
+     * 从有序去的前面查找插入位置，采用使用交换代替移动元素的方式进行操作
      * sort3的写法不如sort2好
      * @param a
      */
