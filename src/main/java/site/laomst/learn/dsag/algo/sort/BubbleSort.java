@@ -6,7 +6,38 @@ import site.laomst.learn.dsag.util.ArrayUtil;
 import java.util.Arrays;
 
 public class BubbleSort {
+
+    /**
+     * 最初的实现，没有任何优化
+     *
+     * @param a
+     */
     public static void sort(int[] a) {
+        System.out.println("BubbleSort.sort -> ");
+        if (a == null || a.length <= 1) {
+            return;
+        }
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a.length - 1 - i; j++) {
+                if (a[j] > a[j + 1]) {
+                    ArrayUtil.swap(a, j, j + 1);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void sortTest() {
+        ArrayUtil.sortTest(BubbleSort::sort);
+    }
+
+    /**
+     * 优化1，如果在一次冒泡中，没有发生任何的数据交换，那么就可以提前结束了
+     *
+     * @param a
+     */
+    public static void sort2(int[] a) {
+        System.out.println("BubbleSort.sort2 -> ");
         if (a == null || a.length <= 1) {
             return;
         }
@@ -15,9 +46,7 @@ public class BubbleSort {
             boolean flag = false;
             for (int j = 0; j < a.length - 1 - i; j++) {
                 if (a[j] > a[j + 1]) {
-                    int tmp = a[j];
-                    a[j] = a[j + 1];
-                    a[j + 1] = tmp;
+                    ArrayUtil.swap(a, j, j + 1);
                     // 本次冒泡有数据交换
                     flag = true;
                 }
@@ -30,11 +59,8 @@ public class BubbleSort {
     }
 
     @Test
-    public void sortTest() {
-        int[] a = ArrayUtil.genIntArray();
-        System.out.println(Arrays.toString(a));
-        sort(a);
-        System.out.println(Arrays.toString(a));
+    public void sort2Test() {
+        ArrayUtil.sortTest(BubbleSort::sort2);
     }
 
     /**
@@ -43,7 +69,8 @@ public class BubbleSort {
      *
      * @param a
      */
-    public static void sort2(int[] a) {
+    public static void sort3(int[] a) {
+        System.out.println("BubbleSort.sort3 -> ");
         if (a == null || a.length <= 1) {
             return;
         }
@@ -56,9 +83,7 @@ public class BubbleSort {
             boolean flag = false;
             for (int j = 0; j < a.length - 1 - i; j++) {
                 if (a[j] > a[j + 1]) {
-                    int tmp = a[j];
-                    a[j] = a[j + 1];
-                    a[j + 1] = tmp;
+                    ArrayUtil.swap(a, j, j + 1);
                     // 此次冒泡发生了数据交换
                     flag = true;
                     // 上次交换的位置
@@ -74,28 +99,25 @@ public class BubbleSort {
     }
 
     @Test
-    public void sort2Test() {
-        int[] a = ArrayUtil.genIntArray();
-        System.out.println(Arrays.toString(a));
-        sort2(a);
-        System.out.println(Arrays.toString(a));
+    public void sort3Test() {
+        ArrayUtil.sortTest(BubbleSort::sort3);
     }
 
     /**
      * 向下冒泡
      * 从a[0]开始，用这个元素去跟后面的所有元素比较，如果发现这个元素大于后面的某个元素，则交换。
+     *
      * @param a
      */
     public static void sortBubbleDown(int[] a) {
+        System.out.println("BubbleSort.sortBubbleDown -> ");
         if (a == null || a.length <= 1) {
             return;
         }
         for (int i = 0; i < a.length; i++) {
             for (int j = i + 1; j < a.length; j++) {
                 if (a[i] > a[j]) {
-                    int tmp = a[i];
-                    a[i] = a[j];
-                    a[j] = tmp;
+                    ArrayUtil.swap(a, j, j + 1);
                 }
             }
         }
@@ -103,9 +125,6 @@ public class BubbleSort {
 
     @Test
     public void sortBubbleDownTest() {
-        int[] a = ArrayUtil.genIntArray();
-        System.out.println(Arrays.toString(a));
-        sortBubbleDown(a);
-        System.out.println(Arrays.toString(a));
+        ArrayUtil.sortTest(BubbleSort::sortBubbleDown);
     }
 }

@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class QuickSort {
     @Best
     public static void sort(int[] a) {
+        System.out.println("QuickSort.sort -> ");
         if (a == null || a.length <= 1) {
             return;
         }
@@ -41,9 +42,6 @@ public class QuickSort {
 
     @Test
     public void testSort() {
-        int[] a = ArrayUtil.genIntArray();
-        System.out.println(Arrays.toString(a));
-        sort(a);
-        System.out.println(Arrays.toString(a));
+        ArrayUtil.sortTest(QuickSort::sort);
     }
 }

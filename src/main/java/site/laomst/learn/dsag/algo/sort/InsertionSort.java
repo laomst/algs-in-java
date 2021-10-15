@@ -10,6 +10,7 @@ public class InsertionSort {
 
     @Best
     public static void sort(int[] a) {
+        System.out.println("InsertionSort.sort -> ");
         if (a == null || a.length <= 1) {
             return;
         }
@@ -31,10 +32,7 @@ public class InsertionSort {
 
     @Test
     public void sortTest() {
-        int[] a = ArrayUtil.genIntArray();
-        System.out.println(Arrays.toString(a));
-        sort(a);
-        System.out.println(Arrays.toString(a));
+        ArrayUtil.sortTest(InsertionSort::sort);
     }
 
     /**
@@ -42,6 +40,7 @@ public class InsertionSort {
      * @param a
      */
     public static void sort2(int[] a) {
+        System.out.println("InsertionSort.sort2 -> ");
         if (a == null || a.length <= 1) {
             return;
         }
@@ -63,10 +62,7 @@ public class InsertionSort {
 
     @Test
     public void sort2Test() {
-        int[] a = ArrayUtil.genIntArray();
-        System.out.println(Arrays.toString(a));
-        sort2(a);
-        System.out.println(Arrays.toString(a));
+        ArrayUtil.sortTest(InsertionSort::sort2);
     }
 
     /**
@@ -75,6 +71,7 @@ public class InsertionSort {
      * @param a
      */
     public static void sort3(int[] a) {
+        System.out.println("InsertionSort.sort3 -> ");
         if (a == null || a.length <= 1) {
             return;
         }
@@ -95,10 +92,7 @@ public class InsertionSort {
 
     @Test
     public void sort3Test() {
-        int[] a = ArrayUtil.genIntArray();
-        System.out.println(Arrays.toString(a));
-        sort3(a);
-        System.out.println(Arrays.toString(a));
+        ArrayUtil.sortTest(InsertionSort::sort3);
     }
 
 }

@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 public class MergeSort {
     public static void sort(int[] a) {
+        System.out.println("MergeSort.sort -> ");
         if (a == null || a.length <= 1) {
             return;
         }
@@ -56,10 +57,7 @@ public class MergeSort {
 
     @Test
     public void sortTest() {
-        int[] a = ArrayUtil.genIntArray();
-        System.out.println(Arrays.toString(a));
-        sort(a);
-        System.out.println(Arrays.toString(a));
+        ArrayUtil.sortTest(MergeSort::sort);
     }
 
     /**
@@ -68,6 +66,7 @@ public class MergeSort {
      */
     @Best
     public static void sort2(int[] a) {
+        System.out.println("MergeSort.sort2 -> ");
         if (a == null || a.length <= 1) {
             return;
         }
@@ -124,9 +123,6 @@ public class MergeSort {
 
     @Test
     public void sort2Test() {
-        int[] a = ArrayUtil.genIntArray();
-        System.out.println(Arrays.toString(a));
-        sort2(a);
-        System.out.println(Arrays.toString(a));
+        ArrayUtil.sortTest(MergeSort::sort2);
     }
 }

@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 public class SelectionSort {
     public static void sort(int[] a) {
+        System.out.println("SelectionSort.sort -> ");
         if (a == null || a.length <= 1) {
             return;
         }
@@ -23,9 +24,6 @@ public class SelectionSort {
 
     @Test
     public void sortTest() {
-        int[] a = ArrayUtil.genIntArray();
-        System.out.println(Arrays.toString(a));
-        sort(a);
-        System.out.println(Arrays.toString(a));
+        ArrayUtil.sortTest(SelectionSort::sort);
     }
 }
