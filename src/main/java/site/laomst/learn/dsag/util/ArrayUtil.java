@@ -15,10 +15,16 @@ public class ArrayUtil {
         a[index2] = tmp;
     }
 
-    public static void sortTest(Consumer<int[]> sorter) {
-        int[] a = ArrayUtil.genIntArray();
+    public static void sortTest(Consumer<int[]> sorter, int[] a) {
+        if (a == null) {
+            a = ArrayUtil.genIntArray();
+        }
         System.out.println(Arrays.toString(a));
         sorter.accept(a);
         System.out.println(Arrays.toString(a));
+    }
+
+    public static void sortTest(Consumer<int[]> sorter) {
+        sortTest(sorter, null);
     }
 }

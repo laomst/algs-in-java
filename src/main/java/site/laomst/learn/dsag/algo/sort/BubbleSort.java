@@ -28,7 +28,7 @@ public class BubbleSort {
 
     @Test
     public void sortTest() {
-        ArrayUtil.sortTest(BubbleSort::sort);
+        ArrayUtil.sortTest(BubbleSort::sort, new int[]{1, 1, 1, 1, 1});
     }
 
     /**
@@ -64,8 +64,10 @@ public class BubbleSort {
     }
 
     /**
-     * 冒泡排序改进，在每一次冒泡之后记录最后一次元素交换的位置，作为下次比较的边界
-     * 对于边界外部的元素，在下次迭代的时候无需进行比较
+     * 优化2 比较边界
+     * 仔细思考一下，如果在一次冒泡中，最后一次交换操作发生在j上，说明j之后的元素都大于j之前的元素
+     *
+     * 这种写法在有序度比较高的情况下性能会有较为明显的提升，但是如果有序度很低的话，反而会因为记录最后一次交换位置的操作而损失性能
      *
      * @param a
      */
@@ -78,10 +80,10 @@ public class BubbleSort {
         int lastExchangeIndex = 0;
         // 无序数据的边界，每次只需要比较到这里就可以退出
         int sortBorder = a.length - 1;
-        for (int i = 0; i < sortBorder; i++) {
+        for (int i = 0; i < a.length - 1; i++) {
             // 提前退出的标志位
             boolean flag = false;
-            for (int j = 0; j < a.length - 1 - i; j++) {
+            for (int j = 0; j < sortBorder; j++) {
                 if (a[j] > a[j + 1]) {
                     ArrayUtil.swap(a, j, j + 1);
                     // 此次冒泡发生了数据交换
@@ -100,7 +102,8 @@ public class BubbleSort {
 
     @Test
     public void sort3Test() {
-        ArrayUtil.sortTest(BubbleSort::sort3);
+        ArrayUtil.sortTest(BubbleSort::sort3, new int[]{1, 2, 3, 5, 1});
+//        ArrayUtil.sortTest(BubbleSort::sort3);
     }
 
     /**
