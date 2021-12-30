@@ -20,9 +20,11 @@ public class InsertionSort {
             // j 用来记录 value 需要插入的位置, 从有序区的尾部向前查找插入位置
             int j = i - 1;
             for (; j >= 0; j--) {
+                // 如果没有找到插入位置，就继续向前移动，同时把元素后移
                 if (a[j] > value) {
                     a[j + 1] = a[j];
                 } else {
+                    // 否则，value比a[j]大了，它应该插入到a[j]后面，所以j + 1 就是value需要插入的位置
                     break;
                 }
             }
@@ -45,16 +47,21 @@ public class InsertionSort {
             return;
         }
         for (int i = 1; i < a.length; i++) {
+            // 记录要插入的值
             int value = a[i];
             int j = 0;
+            // 从前到后找到需要插入的位置
             for (; j < i; j++) {
+                // value比j小，所以value应该插入到a[j]的位置，j就是value要插入的位置
                 if (value < a[j]) {
                     break;
                 }
             }
+            // 从插入位置开始，所有的元素后移一位
             for (int k = i; k > j; k--) {
                 a[k] = a[k - 1];
             }
+            // 插入值
             a[j] = value;
         }
     }
@@ -79,9 +86,11 @@ public class InsertionSort {
             int value = a[i];
             int j = 0;
             for (; j < i; j++) {
+                // 如果value比a[j] 大，则不满足插入条件，继续往下走
                 if (value >= a[j]) {
                     continue;
                 }
+                // 因为这是在有序区插入，后面会发生n多次的交换，所以这个写法的效率不如sort2
                 int tmp = a[j];
                 a[j] = value;
                 value = tmp;
