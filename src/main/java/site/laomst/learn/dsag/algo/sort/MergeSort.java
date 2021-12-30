@@ -103,7 +103,7 @@ public class MergeSort {
         int start1 = ri;
         int end1 = end;
 
-        // 如果是左边的分区还有剩余的数据
+        // 如果是左边的分区有剩余，只要是遍历完了的分区，索引值一定等于分区长度，所以这个地方要用 <=
         if (li <= q) {
             start1 = li;
             end1 = q;
