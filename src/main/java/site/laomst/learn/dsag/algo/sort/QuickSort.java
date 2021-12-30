@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.util.ArrayUtil;
 import site.laomst.learn.dsag.util.Best;
 
-import java.util.Arrays;
-
 public class QuickSort {
     @Best
     public static void sort(int[] a) {
@@ -26,8 +24,10 @@ public class QuickSort {
         // 用一个i，记录pivot的位置
         int i = start;
 
+        // 这个地方刚开始可能会有一些i和j相同的情况出现，但是只要不是本来就有序的，运行几次之后就会出现i比j小的情况
         for (int j = start; j <= end - 1; j++) {
             if (a[j] < pivot) {
+                // 把比中心轴小的数据交换到i的位置上，i自增1，这个时候i代表pivot应该处于的位置，其左侧也都是比pivot小的值
                 ArrayUtil.swap(a, i, j);
                 ++i;
             }
