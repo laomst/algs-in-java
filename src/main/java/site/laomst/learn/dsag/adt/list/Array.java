@@ -1,5 +1,7 @@
 package site.laomst.learn.dsag.adt.list;
 
+import java.util.Arrays;
+
 public class Array<E> {
 
     private static final int DEFAULT_CAPACITY = 10;
@@ -30,43 +32,91 @@ public class Array<E> {
         }
     }
 
-    public boolean add(E e) {
-
+    public void append(E e) {
+        growCapacityIfNecessary(size + 1);
+        elementData[size++] = e;
     }
 
-    private void ensureCapacityInternal(int minCapacity) {
-
+    public void insert(int index, E e) {
+        indexCheckForInsert(index);
+        growCapacityIfNecessary(size + 1);
+        System.arraycopy(elementData, index, elementData, index + 1, size - index);
+        elementData[index] = e;
+        size++;
     }
 
-    private int calculateCapacity(int minCapacity) {
+    public E get(int index) {
+        rangeCheck(index);
+        return elementData(index);
+    }
+
+    public E set(int index, E e) {
+        rangeCheck(index);
+
+        E oldValue = elementData(index);
+        elementData[index] = e;
+        return oldValue;
+    }
+
+    public E remove(int index) {
+        rangeCheck(index);
+
+        E oldValue = elementData(index);
+
+        int numMoved = size - index - 1;
+        if (numMoved > 0) {
+            System.arraycopy(elementData, index+1, elementData, index, numMoved);
+        }
+
+        elementData[--size] = null; // clear to let GC do its work
+
+        return oldValue;
+    }
+
+    @SuppressWarnings("unchecked")
+    E elementData(int index) {
+        return (E) elementData[index];
+    }
+
+    // 如果有必要的话进行扩容
+    private void growCapacityIfNecessary(int minCapacity) {
+        // 已经发生溢出 overflow
+        if (minCapacity < 0) {
+            throw new OutOfMemoryError();
+        }
         if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
-            return Math.max(DEFAULT_CAPACITY, minCapacity);
+            minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
         }
-        return minCapacity;
-    }
-
-    private void ensureExplicitCapacity(int minCapacity) {
-        if (minCapacity > elementData.length) {
-
+        if (minCapacity < elementData.length) {
+            return;
         }
-    }
-
-    private void growCapacity(int minCapacity) {
         int oldCapacity = elementData.length;
         int newCapacity = oldCapacity + oldCapacity >> 1;
         if (newCapacity < minCapacity) {
             newCapacity = minCapacity;
         }
         if (newCapacity > MAX_ARRAY_SIZE) {
-            newCapacity = hugeCapacity(minCapacity);
+            newCapacity = Integer.MAX_VALUE;
+        }
+        System.out.println("进行了扩容操作 oldCapacity:" + oldCapacity + " newCapacity:" + newCapacity);
+        elementData = Arrays.copyOf(elementData, newCapacity);
+    }
+
+    private void rangeCheck(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
         }
     }
 
-    private static int hugeCapacity(int minCapacity) {
-        if (minCapacity < 0) // overflow
-            throw new OutOfMemoryError();
-        return (minCapacity > MAX_ARRAY_SIZE) ?
-                Integer.MAX_VALUE :
-                MAX_ARRAY_SIZE;
+    private void indexCheckForInsert(int index) {
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+        }
     }
+
+    private String outOfBoundsMsg(int index) {
+        return "Index: " + index + ", Size: " + size;
+    }
+
+
 }
