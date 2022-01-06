@@ -2,7 +2,7 @@ package site.laomst.learn.dsag.adt.list;
 
 import java.util.Arrays;
 
-public class Array<E> {
+public class ArrayList<E> {
 
     private static final int DEFAULT_CAPACITY = 10;
 
@@ -18,11 +18,11 @@ public class Array<E> {
 
     private int size;
 
-    public Array() {
+    public ArrayList() {
         elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
     }
 
-    public Array(int initCapacity) {
+    public ArrayList(int initCapacity) {
         if (initCapacity < 0) {
             throw new IllegalArgumentException("The Array capacity must be greater than 0.");
         } else if (initCapacity == 0) {
@@ -32,7 +32,7 @@ public class Array<E> {
         }
     }
 
-    public void append(E e) {
+    public void add(E e) {
         growCapacityIfNecessary(size + 1);
         elementData[size++] = e;
     }
@@ -40,6 +40,7 @@ public class Array<E> {
     public void insert(int index, E e) {
         indexCheckForInsert(index);
         growCapacityIfNecessary(size + 1);
+        // 从index开始，原来的元素需要向后移动一位
         System.arraycopy(elementData, index, elementData, index + 1, size - index);
         elementData[index] = e;
         size++;
@@ -84,6 +85,7 @@ public class Array<E> {
         if (minCapacity < 0) {
             throw new OutOfMemoryError();
         }
+        // 如果创建的是默认容量的Array，那么第一次扩容就要扩展到默认容量，否则就按正常的扩容逻辑来
         if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
             minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
         }
@@ -91,7 +93,8 @@ public class Array<E> {
             return;
         }
         int oldCapacity = elementData.length;
-        int newCapacity = oldCapacity + oldCapacity >> 1;
+        // 正常的扩容逻辑为扩展至原来容量的1.5倍
+        int newCapacity = oldCapacity + (oldCapacity >> 1);
         if (newCapacity < minCapacity) {
             newCapacity = minCapacity;
         }
