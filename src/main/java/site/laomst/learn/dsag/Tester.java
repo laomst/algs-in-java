@@ -3,6 +3,9 @@ package site.laomst.learn.dsag;
 import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.adt.list.ArrayList;
 import site.laomst.learn.dsag.adt.list.LinkedList;
+import site.laomst.learn.dsag.adt.queue.ArrayQueue;
+import site.laomst.learn.dsag.adt.queue.CircularArrayQueue;
+import site.laomst.learn.dsag.adt.queue.LinkedQueue;
 import site.laomst.learn.dsag.adt.stack.ArrayStack;
 import site.laomst.learn.dsag.adt.stack.LinkedStack;
 
@@ -89,6 +92,95 @@ public class Tester {
         arrayStack.push(10086);
         arrayStack.pop();
         System.out.println();
+    }
+
+    @Test
+    public void arrayQueue() {
+        ArrayQueue<Integer> arrayStack = new ArrayQueue<>();
+        arrayStack.enqueue(1);
+        String str1 = arrayStack.printAll();
+        arrayStack.enqueue(2);
+        String str2 = arrayStack.printAll();
+        arrayStack.enqueue(3);
+        String str3 = arrayStack.printAll();
+        arrayStack.enqueue(4);
+        String str4 = arrayStack.printAll();
+        arrayStack.enqueue(5);
+        String str5 = arrayStack.printAll();
+        arrayStack.dequeue();
+        String str6 = arrayStack.printAll();
+        arrayStack.dequeue();
+        String str7 = arrayStack.printAll();
+        arrayStack.dequeue();
+        String str8 = arrayStack.printAll();
+        arrayStack.enqueue(11);
+        String str9 = arrayStack.printAll();
+        arrayStack.enqueue(12);
+        String str10 = arrayStack.printAll();
+        arrayStack.enqueue(13);
+        String str12 = arrayStack.printAll();
+        arrayStack.enqueue(14);
+        String str13 = arrayStack.printAll();
+        arrayStack.enqueue(15);
+        String str14 = arrayStack.printAll();
+        arrayStack.enqueue(16);
+        String str15 = arrayStack.printAll();
+        arrayStack.enqueue(17);
+        String str16 = arrayStack.printAll();
+        arrayStack.enqueue(18);
+        String str17 = arrayStack.printAll();
+        arrayStack.enqueue(19);
+        String str18 = arrayStack.printAll();
+        arrayStack.enqueue(20);
+        String str19 = arrayStack.printAll();
+        arrayStack.enqueue(21);
+        String str20 = arrayStack.printAll();
+        arrayStack.dequeue();
+        String str21 = arrayStack.printAll();
+        System.out.println();
+    }
+
+    @Test
+    public void linkedQueueTest() {
+        LinkedQueue<Integer> linkedQueue = new LinkedQueue<>();
+        linkedQueue.enqueue(1);
+        linkedQueue.enqueue(2);
+        linkedQueue.enqueue(3);
+        linkedQueue.enqueue(4);
+        linkedQueue.enqueue(5);
+        linkedQueue.dequeue();
+        linkedQueue.dequeue();
+        linkedQueue.dequeue();
+        linkedQueue.enqueue(6);
+        linkedQueue.enqueue(7);
+        linkedQueue.dequeue();
+    }
+
+    @Test
+    public void circularArrayQueueTest() {
+        CircularArrayQueue<Integer> arrayQueue = new CircularArrayQueue<>(10);
+        arrayQueue.enqueue(1);
+        arrayQueue.enqueue(2);
+        arrayQueue.enqueue(3);
+        arrayQueue.enqueue(4);
+        arrayQueue.enqueue(5);
+        arrayQueue.enqueue(6);
+        arrayQueue.enqueue(7);
+        arrayQueue.enqueue(8);
+        arrayQueue.enqueue(9);
+        arrayQueue.enqueue(10);
+        arrayQueue.dequeue();
+        arrayQueue.dequeue();
+        arrayQueue.enqueue(11);
+        arrayQueue.enqueue(12);
+        arrayQueue.enqueue(13);
+        arrayQueue.enqueue(14);
+        arrayQueue.enqueue(15);
+        arrayQueue.enqueue(16);
+        arrayQueue.enqueue(17);
+        arrayQueue.enqueue(18);
+        arrayQueue.enqueue(19);
+        arrayQueue.enqueue(20);
     }
 
 
