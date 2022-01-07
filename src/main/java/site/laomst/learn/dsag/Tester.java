@@ -3,6 +3,8 @@ package site.laomst.learn.dsag;
 import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.adt.list.ArrayList;
 import site.laomst.learn.dsag.adt.list.LinkedList;
+import site.laomst.learn.dsag.adt.stack.ArrayStack;
+import site.laomst.learn.dsag.adt.stack.LinkedStack;
 
 public class Tester {
 
@@ -55,6 +57,38 @@ public class Tester {
         list.add("4");
         list.add("5");
         System.out.println(list.get(4));
+    }
+
+    @Test
+    public void arrayStackTest() {
+        ArrayStack<Integer> arrayStack = new ArrayStack<>();
+        arrayStack.push(1);
+        arrayStack.push(2);
+        arrayStack.push(3);
+        arrayStack.push(4);
+        arrayStack.push(5);
+        arrayStack.pop();
+        arrayStack.pop();
+        arrayStack.pop();
+        arrayStack.push(10086);
+        arrayStack.pop();
+        System.out.println();
+    }
+
+    @Test
+    public void LinkedStackTest() {
+        LinkedStack<Integer> arrayStack = new LinkedStack<>();
+        arrayStack.push(1);
+        arrayStack.push(2);
+        arrayStack.push(3);
+        arrayStack.push(4);
+        arrayStack.push(5);
+        arrayStack.pop();
+        arrayStack.pop();
+        arrayStack.pop();
+        arrayStack.push(10086);
+        arrayStack.pop();
+        System.out.println();
     }
 
 
