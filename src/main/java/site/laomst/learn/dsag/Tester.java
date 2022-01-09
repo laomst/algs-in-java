@@ -6,6 +6,8 @@ import site.laomst.learn.dsag.adt.list.LinkedList;
 import site.laomst.learn.dsag.adt.queue.ArrayQueue;
 import site.laomst.learn.dsag.adt.queue.CircularArrayQueue;
 import site.laomst.learn.dsag.adt.queue.LinkedQueue;
+import site.laomst.learn.dsag.adt.skiplist.SkipList;
+import site.laomst.learn.dsag.adt.skiplist.WZSkipList;
 import site.laomst.learn.dsag.adt.stack.ArrayStack;
 import site.laomst.learn.dsag.adt.stack.LinkedStack;
 
@@ -181,6 +183,31 @@ public class Tester {
         arrayQueue.enqueue(18);
         arrayQueue.enqueue(19);
         arrayQueue.enqueue(20);
+    }
+
+    @Test
+    public void wzSkipListTest() {
+        WZSkipList skipList = new WZSkipList();
+        skipList.insert(1);
+        skipList.insert(2);
+        skipList.insert(3);
+        skipList.insert(-1);
+        skipList.insert(4);
+        skipList.insert(6);
+        skipList.insert(5);
+    }
+
+    @Test
+    public void skipListTest() {
+        SkipList<Integer> skipList = new SkipList<>(Integer::compareTo);
+        skipList.insert(1);
+        skipList.insert(2);
+        skipList.insert(3);
+        skipList.insert(-1);
+        skipList.insert(4);
+        skipList.insert(6);
+        skipList.insert(5);
+        skipList.printAll();
     }
 
 
