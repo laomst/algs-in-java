@@ -103,12 +103,6 @@ public class ArrayQueue<E> {
         return (E) elementData[index];
     }
 
-    public String printElementData() {
-        String eleStr = Arrays.toString(elementData);
-        String str = eleStr + " ["+head+","+tail+","+size+"]";
-        System.out.println(str);
-        return str;
-    }
 
     public String printAll() {
         String str = Arrays.toString(Arrays.copyOfRange(elementData, head, tail));

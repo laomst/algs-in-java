@@ -31,7 +31,7 @@ public class SkipList<E> {
         Node p = head;
         // 找到每一级的索引需要插入的位置，存放到update[]中
         for (int i = level-1; i >= 0; i--) {
-            while (p.nexts[i] != null && itemComparator.compare(item(p.nexts[i]), e) < 0) {
+            while (p.nexts[i] != null && compareItem(p.nexts[i], e) < 0) {
                 p = p.nexts[i];
             }
             update[i] = p;
@@ -48,6 +48,42 @@ public class SkipList<E> {
             levelCount = level;
         }
     }
+
+    public void delete(E value) {
+        Node[] update = new Node[levelCount];
+        Node p = head;
+        for (int i = levelCount - 1; i>=0; i--) {
+            while(p.nexts[i] != null && compareItem(p.nexts[i], value) < 0) {
+                p = p.nexts[i];
+            }
+            update[i] = p;
+        }
+
+        if (p.nexts[0] != null && compareItem(p.nexts[0], value) == 0) {
+            for (int i = levelCount - 1; i >=0; i--) {
+                if (update[i].nexts[i] != null && compareItem(update[i].nexts[i], value) == 0) {
+                    update[i].nexts[i] = update[i].nexts[i].nexts[i];
+                }
+            }
+        }
+
+        while (levelCount > 1 && head.nexts[levelCount] == null) {
+            levelCount--;
+        }
+    }
+
+    private int compareItem(Node x, E e) {
+        return itemComparator.compare(item(x), e);
+    }
+
+    private int compareItem(E e, Node x) {
+        return itemComparator.compare(e, item(x));
+    }
+
+    private int compareItem(E e1, E e2) {
+        return itemComparator.compare(e1, e2);
+    }
+
 
     public void printAll() {
         Node p = head;
