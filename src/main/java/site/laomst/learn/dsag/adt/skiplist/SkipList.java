@@ -1,6 +1,7 @@
 package site.laomst.learn.dsag.adt.skiplist;
 
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 public class SkipList<E> {
     private static final float SKIPLIST_P = 0.5f;
@@ -17,6 +18,30 @@ public class SkipList<E> {
             throw new NullPointerException("元素比较器不能为空");
         }
         this.itemComparator = itemComparator;
+    }
+
+    public E find(E e) {
+        Node x = findNode(e);
+        if (x == null) {
+            throw new NoSuchElementException();
+        } else {
+            return item(x);
+        }
+    }
+
+    private Node findNode(E e) {
+        Node p = head;
+        for (int i = 0; i < levelCount - 1; i++) {
+            while (p.nexts[i] != null && compareItem(p.nexts[i], e) < 0) {
+                p = p.nexts[i];
+            }
+        }
+
+        if (p.nexts[0] != null && compareItem(p.nexts[0], e) == 0) {
+            return p.nexts[0];
+        } else {
+            return null;
+        }
     }
 
     public void insert(E e) {
