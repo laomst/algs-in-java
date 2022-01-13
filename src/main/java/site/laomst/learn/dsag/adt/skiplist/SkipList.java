@@ -144,14 +144,7 @@ public class SkipList<E> {
 
         @Override
         public String toString() {
-            StringBuilder builder = new StringBuilder();
-            builder.append("{ data: ");
-            builder.append(item);
-            builder.append("; levels: ");
-            builder.append(maxLevel);
-            builder.append(" }");
-
-            return builder.toString();
+            return "{ data: " + item + "; levels: " + maxLevel + " }";
         }
     }
 
