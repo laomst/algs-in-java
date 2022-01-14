@@ -11,7 +11,13 @@ import site.laomst.learn.dsag.adt.skiplist.WZSkipList;
 import site.laomst.learn.dsag.adt.stack.ArrayStack;
 import site.laomst.learn.dsag.adt.stack.LinkedStack;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class Tester {
+    static final int MAXIMUM_CAPACITY = 1 << 30;
 
     @Test
     public void arrayTest() {
@@ -210,5 +216,36 @@ public class Tester {
         skipList.printAll();
     }
 
+    @Test
+    public void HashMapTest() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(null, null);
+        hashMap.put("1", "1");
+        hashMap.put("2", "2");
+        Set<String> strings = hashMap.keySet();
+        strings.remove(null);
+        System.out.println();
+    }
+
+    @Test
+    public void to2Test() {
+        int cap = 5;
+        int n = cap - 1;
+//        int n = cap;
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        n = (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+        System.out.println(n);
+    }
+
+    @Test
+    public void expressTest() {
+        int n;
+        int res = (n = 2) + (n >> 1);
+        System.out.println(res);
+    }
 
 }
