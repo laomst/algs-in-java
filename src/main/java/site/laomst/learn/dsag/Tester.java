@@ -1,6 +1,7 @@
 package site.laomst.learn.dsag;
 
 import org.junit.jupiter.api.Test;
+import site.laomst.learn.dsag.adt.hashtable.HashMapV1;
 import site.laomst.learn.dsag.adt.list.ArrayList;
 import site.laomst.learn.dsag.adt.list.LinkedList;
 import site.laomst.learn.dsag.adt.queue.ArrayQueue;
@@ -12,6 +13,7 @@ import site.laomst.learn.dsag.adt.stack.ArrayStack;
 import site.laomst.learn.dsag.adt.stack.LinkedStack;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -242,10 +244,46 @@ public class Tester {
     }
 
     @Test
+    public void SetTest() {
+        HashSet<String> set = new HashSet<>();
+        set.add(null);
+        System.out.println();
+    }
+
+    @Test
     public void expressTest() {
         int n;
         int res = (n = 2) + (n >> 1);
         System.out.println(res);
+    }
+
+    @Test
+    public void HashMapV1Test() {
+        HashMapV1<String, String> hashMap = new HashMapV1<>();
+        hashMap.put("1", "1");
+        hashMap.put("2", "1");
+        hashMap.put("3", "1");
+        hashMap.put("4", "1");
+        hashMap.put("5", "1");
+        hashMap.put("6", "1");
+        hashMap.put("7", "1");
+        hashMap.put("8", "1");
+        hashMap.put("9", "1");
+        hashMap.put("10", "1");
+        hashMap.put("a", "1");
+        hashMap.put("b", "1");
+        hashMap.put("c", "1");
+        hashMap.put("d", "1");
+        hashMap.put("e", "1");
+        hashMap.put("f", "1");
+        hashMap.put("g", "1");
+        hashMap.put("h", "1");
+        hashMap.put("i", "1");
+        hashMap.put("j", "1");
+        hashMap.put("k", "1");
+        hashMap.put("l", "1");
+        hashMap.put("m", "1");
+        System.out.println();
     }
 
 }
