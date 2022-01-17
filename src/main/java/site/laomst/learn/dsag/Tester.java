@@ -14,9 +14,9 @@ import site.laomst.learn.dsag.adt.stack.LinkedStack;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Tester {
     static final int MAXIMUM_CAPACITY = 1 << 30;
@@ -219,15 +219,26 @@ public class Tester {
     }
 
     @Test
+    public void streamTest() {
+        Stream.iterate(1, it -> it + 1)
+                .limit(100)
+                .filter(it -> it.compareTo(6) > 0)
+                .filter(it -> it.compareTo(100) < 0)
+                .filter(it -> it % 2 == 1)
+                .forEach(System.out::println);
+    }
+
+    @Test
     public void HashMapTest() {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put(null, null);
-        hashMap.put("1", "1");
-        hashMap.put("2", "2");
-        Set<String> strings = hashMap.keySet();
-        strings.remove(null);
+        Map<String, String> map = new HashMap<>();
+        map.put(null, null);
+        map.put("1", "1");
+        map.put("2", "2");
+        Set<String> strings = map.keySet();
+        strings.remove("1");
         System.out.println();
     }
+
 
     @Test
     public void to2Test() {
