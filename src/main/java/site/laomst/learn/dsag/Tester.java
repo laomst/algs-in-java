@@ -242,7 +242,7 @@ public class Tester {
 
     @Test
     public void to2Test() {
-        int cap = 5;
+        int cap = 1;
         int n = cap - 1;
 //        int n = cap;
         n |= n >>> 1;
@@ -250,6 +250,7 @@ public class Tester {
         n |= n >>> 4;
         n |= n >>> 8;
         n |= n >>> 16;
+        System.out.println(n);
         n = (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
         System.out.println(n);
     }
@@ -270,7 +271,7 @@ public class Tester {
 
     @Test
     public void HashMapV1Test() {
-        HashMapV1<String, String> hashMap = new HashMapV1<>();
+        HashMapV1<String, String> hashMap = new HashMapV1<>(1);
         hashMap.put("1", "1");
         hashMap.put("2", "1");
         hashMap.put("3", "1");

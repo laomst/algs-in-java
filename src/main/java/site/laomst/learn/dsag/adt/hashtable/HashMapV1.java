@@ -20,8 +20,9 @@ public class HashMapV1<K, V> {
     static final float DEFAULT_LOAD_FACTOR = 0.75F;
 
     static final int hash(Object key) {
-        int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+//        int h;
+//        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        return 0;
     }
 
     static class Node<K, V> {
@@ -192,13 +193,10 @@ public class HashMapV1<K, V> {
 
             // 否则key还不存在与Map 中
             p.next = newNode(hash, key, value, null);
-            if (++size > threshold) {
-                resize();
-            }
-            return null;
-
         }
-
+        if (++size > threshold) {
+            resize();
+        }
         return null;
     }
 
