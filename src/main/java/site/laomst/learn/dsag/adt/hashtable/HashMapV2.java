@@ -2,7 +2,12 @@ package site.laomst.learn.dsag.adt.hashtable;
 
 import java.util.Objects;
 
-public class HashMap<K, V> {
+/**
+ * @see HashMapV1 的重构版本，提高了代码的可读性，修改了扩容的逻辑，不再是根据 size 进行扩容，而是根据使用的桶的数量进行扩容，同时把table的初始化逻辑独立了
+ * @param <K>
+ * @param <V>
+ */
+public class HashMapV2<K, V> {
 
     /**
      * 默认的初始容量
@@ -55,22 +60,6 @@ public class HashMap<K, V> {
         V value;
         Node<K, V> next;
 
-        Node(K key) {
-            this(hash(key), key, null, null);
-        }
-
-        Node(K key, V value) {
-            this(hash(key), key, value, null);
-        }
-
-        Node(K key, V value, Node<K, V> next) {
-            this(hash(key), key, value, next);
-        }
-
-        Node(int hash, K key) {
-            this(hash, key, null, null);
-        }
-
         Node(int hash, K key, V value, Node<K, V> next) {
             this.hash = hash;
             this.key = key;
@@ -98,15 +87,28 @@ public class HashMap<K, V> {
 
     Node<K, V>[] table;
 
+    /**
+     * 已经被占用的桶的数量，HashMapV2 就是根据这个值来判断是否进行扩容的
+     */
     int bucketSize;
 
+    /**
+     * 已经存储的元素的数量
+     */
     int size;
 
+    /**
+     * 下次需要进行扩容的 bucketSize 的值，
+     * 但是当table还没有被初始化的时候，它存储的是 table的初始化人容量，如果table没有被初始化，并且 threshold的值为0，那么代表table的初始化容量是 DEFAULT_INITIAL_CAPACITY
+     */
     int threshold;
 
+    /**
+     * 装载因子
+     */
     final float loadFactor;
 
-    public HashMap(int initialCapacity, float loadFactor) {
+    public HashMapV2(int initialCapacity, float loadFactor) {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Illegal initial capacity: " + initialCapacity);
         }
@@ -117,47 +119,92 @@ public class HashMap<K, V> {
         this.threshold = tableSizeFor(initialCapacity);
     }
 
+    public HashMapV2(int initialCapacity) {
+        this(initialCapacity, DEFAULT_LOAD_FACTOR);
+    }
+
+    public HashMapV2() {
+        this.loadFactor = DEFAULT_LOAD_FACTOR;
+    }
+
+    public V put(K key, V value) {
+        return putVal(hash(key), key, value, false);
+    }
+
+    public V putIfAbsent(K key, V value) {
+        return putVal(hash(key), key, value, true);
+    }
+
+    public V get(Object key) {
+        Node<K, V> e = getNode(hash(key), key);
+        return e == null ? null : e.value;
+    }
+
+    public V getOrDefault(Object key, V defaultValue) {
+        Node<K, V> e = getNode(hash(key), key);
+        return e == null ? defaultValue : e.value;
+    }
+
     @SuppressWarnings({"unchecked"})
     final Node<K, V>[] newTable(int capacity) {
         return (Node<K, V>[]) new Node[capacity];
     }
 
-    final V putVal(int hash, K key, V value, boolean onlyIfAbsent) {
-        Node<K, V>[] tab;
-        Node<K, V> bucketHeader;
-        int tableCapacity, bucketIndex;
-        if ((tab = table)==null || (tableCapacity = tab.length) == 0) {
-            tableCapacity = (tab = initTable()).length;
+    final Node<K, V> getNode(int hash, Object key) {
+        Node<K, V>[] tab = table;
+        int tabCap = tab == null ? 0 : tab.length;
+        if (tabCap == 0) {
+            return null;
         }
-        if ((bucketHeader = tab[bucketIndex=(tableCapacity-1) & hash]) == null) { // 如果对应的桶上面还没有存储任何数据
-//            tab[i] = newNode(hash, key, value, null);
+        Node<K, V> p = tab[bucketIndex(tabCap, hash)];
+        if (p == null) {
+            return null;
+        }
+        K k;
+        do {
+            k = p.key;
+            if (p.hash == hash && Objects.equals(k, key)) {
+                return p;
+            }
+            p = p.next;
+        } while (p != null);
+        return null;
+    }
+
+    final V putVal(int hash, K key, V value, boolean onlyIfAbsent) {
+        Node<K, V>[] tab = table;
+        int tableCapacity = tab == null ? 0 : tab.length;
+        if (tableCapacity == 0) {
+            tab = initTable();
+            tableCapacity = tab.length;
+        }
+        int bucketIndex = bucketIndex(tableCapacity, hash);
+        Node<K, V> p = tab[bucketIndex];
+        if (p == null) { // 如果对应的桶上面还没有存储任何数据
             tab[bucketIndex] = new Node<>(hash, key, value, null);
             bucketSize++;
         } else { // 对应的桶上面已经存储了数据
-            Node<K, V> keyNode;
             K k;
-            // 这里先判断 p.hash == hash 和 p,key == key 的原因是 为了支持 null key
-            if (bucketHeader.hash == hash && ((k = bucketHeader.key) == key || (key != null && key.equals(k)))) { // 如果第一个节点恰好就是我们要寻找的节点
-                keyNode = bucketHeader;
-            } else {
-                while((keyNode = bucketHeader.next) != null) { // 否则，沿着链寻找需要的节点
-                    if (keyNode.hash == hash && ((k = keyNode.key) == key || (key != null && key.equals(k)))) {
-                        break;
-                    }
-                    bucketHeader = bucketHeader.next;
+            Node<K, V> e;
+            do {
+                e = p;
+                k = p.key;
+                if (p.hash == hash && Objects.equals(k, key)) {
+                    break;
                 }
-            }
-            if (keyNode != null) { // 如果key已经存在Map中了
-                V oldValue = keyNode.value;
+                p = p.next;
+            } while (p != null);
+            if (p != null) { // 如果key已经存在Map中了
+                V oldValue = p.value;
                 if (!onlyIfAbsent || oldValue == null) {
-                    keyNode.value = value;
+                    p.value = value;
                 }
                 // 如果是修改老节点的值，不需要 size++,也不需要扩容，直接返回
                 return oldValue;
+            } else {
+                // 否则key还不存在与Map 中
+                e.next = new Node<>(hash, key, value, null);
             }
-
-            // 否则key还不存在与Map 中
-            bucketHeader.next = new Node<>(hash, key, value, null);
         }
         size++;
         if (bucketSize > threshold) {
@@ -179,12 +226,12 @@ public class HashMap<K, V> {
     final Node<K, V>[] resize() {
         Node<K, V>[] oldTab = table;
         // assert oldTab != null && oldTab.length >= MINIMUM_CAPACITY;
-        int oldCap = table.length;
-        if (oldCap > MAXIMUM_CAPACITY) {
+        int oldCap = oldTab.length;
+        if (oldCap > MAXIMUM_CAPACITY) { // 如果 table 的容量已经超过了最大容量，那么就不会再触发扩容操作了
             threshold = Integer.MAX_VALUE;
             return oldTab;
         }
-        int newCap = oldCap << 1;
+        int newCap = oldCap << 1; // 容量扩展为之前的2倍
         Node<K, V>[] newTab = newTable(newCap);
         table = newTab;
         threshold = newThreshold(newCap);
@@ -194,12 +241,12 @@ public class HashMap<K, V> {
                 continue;
             }
             oldTab[i] = null; //help GC
-            if (e.next == null) { // 如果没有发生hash碰撞，直接重哈希就可以了
-                newTab[e.hash & (newCap - 1)] = e;
+            if (e.next == null) { // 如果没有发生hash碰撞，直接放到新桶里面就可以了
+                newTab[bucketIndex(newCap, e.hash)] = e;
             } else { // 如果发生了hash碰撞
-                Node<K,V> loHead = null, loTail = null;
-                Node<K,V> hiHead = null, hiTail = null;
-                Node<K,V> next;
+                Node<K, V> loHead = null, loTail = null;
+                Node<K, V> hiHead = null, hiTail = null;
+                Node<K, V> next;
                 do {
                     next = e.next;
                     // 计算桶索引的算法是采用了掩码的算法，而新的容量是旧容量的两倍，计算的时候是左移了一位。
@@ -211,8 +258,7 @@ public class HashMap<K, V> {
                         else
                             loTail.next = e;
                         loTail = e;
-                    }
-                    else {
+                    } else {
                         if (hiTail == null)
                             hiHead = e;
                         else
@@ -236,5 +282,10 @@ public class HashMap<K, V> {
     final int newThreshold(int newTableCapacity) {
         float ft = (float) newTableCapacity * loadFactor;
         return newTableCapacity < MAXIMUM_CAPACITY && ft < (float) MAXIMUM_CAPACITY ? (int) ft : Integer.MAX_VALUE;
+    }
+
+    final int bucketIndex(int tableCapacity, int hash) {
+        // assert tableCapacity >= MINIMUM_CAPACITY;
+        return (tableCapacity - 1) & hash;
     }
 }

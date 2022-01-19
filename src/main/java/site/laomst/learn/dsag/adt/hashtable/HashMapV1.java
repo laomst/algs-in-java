@@ -2,6 +2,11 @@ package site.laomst.learn.dsag.adt.hashtable;
 
 import java.util.Objects;
 
+/**
+ * 模拟JDK中HashMap的实现，解决桶冲突的策略只是单纯的拉链法，而不会把拉链转换为树
+ * @param <K>
+ * @param <V>
+ */
 public class HashMapV1<K, V> {
 
     /**
@@ -20,9 +25,8 @@ public class HashMapV1<K, V> {
     static final float DEFAULT_LOAD_FACTOR = 0.75F;
 
     static final int hash(Object key) {
-//        int h;
-//        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
-        return 0;
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
     static class Node<K, V> {
