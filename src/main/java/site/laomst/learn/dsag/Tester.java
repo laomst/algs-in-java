@@ -11,11 +11,9 @@ import site.laomst.learn.dsag.adt.skiplist.SkipList;
 import site.laomst.learn.dsag.adt.skiplist.WZSkipList;
 import site.laomst.learn.dsag.adt.stack.ArrayStack;
 import site.laomst.learn.dsag.adt.stack.LinkedStack;
+import site.laomst.learn.dsag.adt.tree.AVLTree;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Tester {
@@ -297,5 +295,6 @@ public class Tester {
         hashMap.put("m", "1");
         System.out.println();
     }
+
 
 }
