@@ -39,6 +39,10 @@ public class AVLTree<K, V> {
         return x == null ? -1 : x.height;
     }
 
+    private int size(Node x) {
+        return x == null ? 0 : x.size;
+    }
+
     @SuppressWarnings("unchecked")
     private K key(Node x) {
         return (K) x.key;
@@ -50,10 +54,7 @@ public class AVLTree<K, V> {
     }
 
     /**
-     * Returns the balance factor of the subtree. The balance factor is defined
-     * as the difference in height of the left subtree and right subtree, in
-     * this order. Therefore, a subtree with a balance factor of -1, 0 or 1 has
-     * the AVL property since the heights of the two child subtrees differ by at
+     * 返回子树的平衡因子，平衡因子定义为左子树和右子树的高度差
      * most one.
      *
      * @param x the subtree
@@ -63,11 +64,26 @@ public class AVLTree<K, V> {
         return height(x.left) - height(x.right);
     }
 
+    private Node put(Node x, K key, V value) {
+        if (x == null) {
+            return new Node(key, value, 0, 1);
+        }
+        int cmp = keyComparator.compare(key, key(x));
+        if (cmp < 0) {
+            x.left = put(x.left, key, value);
+        } else if (cmp > 0) {
+            x.right = put(x.right, key, value);
+        } else {
+            x.value = value;
+            return x;
+        }
+        x.size = 1 + size(x.left) + size(x.right);
+        x.height = 1 + Math.max(height(x.left), height(x.right));
+        return balance(x);
+    }
+
     /**
-     * Restores the AVL tree property of the subtree.
-     *
-     * @param x the subtree
-     * @return the subtree with restored AVL property
+     * 平衡性维持
      */
     private Node balance(Node x) {
         // L
@@ -90,34 +106,34 @@ public class AVLTree<K, V> {
     }
 
     /**
-     * Rotates the given subtree to the right.
+     * 右旋给定的子树
      *
-     * @param x the subtree
-     * @return the right rotated subtree
+     * @param x 子树
+     * @return 右旋后的子树
      */
     private Node rotateRight(Node x) {
         Node y = x.left;
         x.left = y.right;
         y.right = x;
         y.size = x.size;
-//        x.size = 1 + size(x.left) + size(x.right);
+        x.size = 1 + size(x.left) + size(x.right);
         x.height = 1 + Math.max(height(x.left), height(x.right));
         y.height = 1 + Math.max(height(y.left), height(y.right));
         return y;
     }
 
     /**
-     * Rotates the given subtree to the left.
+     * 右旋给定的子树
      *
-     * @param x the subtree
-     * @return the left rotated subtree
+     * @param x 子树
+     * @return 右旋后的子树
      */
     private Node rotateLeft(Node x) {
         Node y = x.right;
         x.right = y.left;
         y.left = x;
         y.size = x.size;
-//        x.size = 1 + size(x.left) + size(x.right);
+        x.size = 1 + size(x.left) + size(x.right);
         x.height = 1 + Math.max(height(x.left), height(x.right));
         y.height = 1 + Math.max(height(y.left), height(y.right));
         return y;
