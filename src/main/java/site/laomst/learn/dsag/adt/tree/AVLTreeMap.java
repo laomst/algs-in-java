@@ -3,7 +3,7 @@ package site.laomst.learn.dsag.adt.tree;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class AVLTree<K, V> {
+public class AVLTreeMap<K, V> {
     static class Node {
         final Object key;
         Object value;
@@ -26,13 +26,105 @@ public class AVLTree<K, V> {
 
     private final Comparator<K> keyComparator;
 
-    public AVLTree(Comparator<K> keyComparator) {
+    public AVLTreeMap(Comparator<K> keyComparator) {
         this.keyComparator = keyComparator;
     }
 
     @SuppressWarnings({"unchecked"})
-    public AVLTree() {
+    public AVLTreeMap() {
         this.keyComparator = (Comparator<K>) DEFAULT_KEY_COMPARATOR;
+    }
+
+    public V get(K key) {
+        Node x = get(root, key);
+        if (x == null) {
+            return null;
+        }
+        return value(x);
+    }
+
+    public V put(K key, V value) {
+        Node e = get(root, key);
+        if (e != null) {
+            V oldValue = value(e);
+            e.value = value;
+            return oldValue;
+        }
+        root = put(root, key, value);
+        return null;
+    }
+
+    public V putIfAbsent(K key, V value) {
+        Node e = get(root, key);
+        if (e != null) {
+            V oldValue = value(e);
+            if (oldValue == null) {
+                e.value = value;
+            }
+            return oldValue;
+        }
+        root = put(root, key, value);
+        return null;
+    }
+
+    public void remove(K key) {
+        Node e = get(root, key);
+        if (e == null) {
+            return;
+        }
+        root = delete(root, key);
+    }
+
+    /**
+     * 从指定的子树中删除给定的节点
+     * @param x
+     * @param key
+     * @return
+     */
+    private Node delete(Node x, K key) {
+        int cmp = keyComparator.compare(key, key(x));
+        if (cmp < 0) {
+            x.left = delete(x.left, key);
+        } else if (cmp > 0) {
+            x.right  = delete(x.right, key);
+        } else {
+            if (x.left == null) { // 如果左子节点为空，那么其右子节点为空或者为叶子节点，这个时候直接返回其右子节点就可以了
+                return x.right;
+            } else if (x.right == null) { // 如果其右子节点为空，那么其左子节点为空或者是叶子节点，这个时候直接返回其左子节点就可以了
+                return x.left;
+            } else {
+                // 如果其左子节点和右子节点都不为空，那么这个时候我们有两个选择
+                // 1.把左子树中值最大节点复制到当前子树的根节点，删除左子树中值最大的节点
+                // 2.把右子树中值最小的节点复制到当前子树的跟节点，删除右子树中值最小的节点
+                // 这里我们选择第二种方式
+                Node y = x;
+                x = min(y.right);
+                x.right = deleteMin(y.right);
+                x.left = y.left;
+            }
+        }
+        x.size = 1 + size(x.left) + size(x.right);
+        x.height = 1 + Math.max(height(x.left), height(x.right));
+        return balance(x);
+    }
+
+    private Node deleteMin(Node x) {
+        // assert x != null;
+        if (x.left == null) {
+            return x.right;
+        }
+        x.left = deleteMin(x.left);
+        x.size = 1 + size(x.left) + size(x.right);
+        x.height = 1 + Math.max(height(x.left), height(x.right));
+        return balance(x);
+    }
+
+    private Node min(Node x) {
+        // assert x != null;
+        if (x.left == null) {
+            return x;
+        }
+        return min(x.left);
     }
 
     private int height(Node x) {
@@ -62,6 +154,20 @@ public class AVLTree<K, V> {
      */
     private int balanceFactor(Node x) {
         return height(x.left) - height(x.right);
+    }
+
+    private Node get(Node x, K key) {
+        if (x == null) {
+            return null;
+        }
+        int cmp = keyComparator.compare(key, key(x));
+        if (cmp < 0) {
+            return get(x.left, key);
+        } else if (cmp > 0) {
+            return get(x.right, key);
+        } else {
+            return x;
+        }
     }
 
     private Node put(Node x, K key, V value) {

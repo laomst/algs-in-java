@@ -3,11 +3,11 @@ package site.laomst.learn.dsag.adt.hashtable;
 import java.util.Objects;
 
 /**
- * 模拟JDK中HashMap的实现，解决桶冲突的策略只是单纯的拉链法，而不会把拉链转换为树
+ * @see java.util.HashMap 的模仿实现，解决桶冲突的策略只是单纯的拉链法，而不会把拉链转换为树
  * @param <K>
  * @param <V>
  */
-public class HashMapV1<K, V> {
+public class HashMapLikeJDK<K, V> {
 
     /**
      * 默认的初始容量，必须是2的整次幂
@@ -105,7 +105,7 @@ public class HashMapV1<K, V> {
 
     final float loadFactor;
 
-    public HashMapV1(int initialCapacity, float loadFactor) {
+    public HashMapLikeJDK(int initialCapacity, float loadFactor) {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Illegal initial capacity: " + initialCapacity);
         }
@@ -116,11 +116,11 @@ public class HashMapV1<K, V> {
         this.threshold = tableSizeFor(initialCapacity);
     }
 
-    public HashMapV1(int initialCapacity) {
+    public HashMapLikeJDK(int initialCapacity) {
         this(initialCapacity, DEFAULT_LOAD_FACTOR);
     }
 
-    public HashMapV1() {
+    public HashMapLikeJDK() {
         this.loadFactor = DEFAULT_LOAD_FACTOR;
     }
 

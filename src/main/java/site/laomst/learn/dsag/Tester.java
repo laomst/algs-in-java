@@ -1,7 +1,7 @@
 package site.laomst.learn.dsag;
 
 import org.junit.jupiter.api.Test;
-import site.laomst.learn.dsag.adt.hashtable.HashMapV1;
+import site.laomst.learn.dsag.adt.hashtable.HashMapLikeJDK;
 import site.laomst.learn.dsag.adt.list.ArrayList;
 import site.laomst.learn.dsag.adt.list.LinkedList;
 import site.laomst.learn.dsag.adt.queue.ArrayQueue;
@@ -11,7 +11,6 @@ import site.laomst.learn.dsag.adt.skiplist.SkipList;
 import site.laomst.learn.dsag.adt.skiplist.WZSkipList;
 import site.laomst.learn.dsag.adt.stack.ArrayStack;
 import site.laomst.learn.dsag.adt.stack.LinkedStack;
-import site.laomst.learn.dsag.adt.tree.AVLTree;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -269,7 +268,7 @@ public class Tester {
 
     @Test
     public void HashMapV1Test() {
-        HashMapV1<String, String> hashMap = new HashMapV1<>(1);
+        HashMapLikeJDK<String, String> hashMap = new HashMapLikeJDK<>(1);
         hashMap.put("1", "1");
         hashMap.put("2", "1");
         hashMap.put("3", "1");

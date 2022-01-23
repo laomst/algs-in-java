@@ -3,11 +3,11 @@ package site.laomst.learn.dsag.adt.hashtable;
 import java.util.Objects;
 
 /**
- * @see HashMapV1 的重构版本，提高了代码的可读性，修改了扩容的逻辑，不再是根据 size 进行扩容，而是根据使用的桶的数量进行扩容，同时把table的初始化逻辑独立了
+ * @see HashMapLikeJDK 的重构版本，提高了代码的可读性，修改了扩容的逻辑，不再是根据 size 进行扩容，而是根据使用的桶的数量进行扩容，同时把table的初始化逻辑独立出来了
  * @param <K>
  * @param <V>
  */
-public class HashMapV2<K, V> {
+public class HashMap<K, V> {
 
     /**
      * 默认的初始容量
@@ -77,9 +77,9 @@ public class HashMapV2<K, V> {
             if (o == this) {
                 return true;
             }
-            if (o instanceof HashMapV1.Node) {
-                HashMapV1.Node<?, ?> x = (HashMapV1.Node<?, ?>) o;
-                return Objects.equals(key, x.getKey()) && Objects.equals(value, x.getValue());
+            if (o instanceof Node) {
+                Node<?, ?> x = (Node<?, ?>) o;
+                return Objects.equals(key, x.key) && Objects.equals(value, x.value);
             }
             return false;
         }
@@ -108,7 +108,7 @@ public class HashMapV2<K, V> {
      */
     final float loadFactor;
 
-    public HashMapV2(int initialCapacity, float loadFactor) {
+    public HashMap(int initialCapacity, float loadFactor) {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Illegal initial capacity: " + initialCapacity);
         }
@@ -119,11 +119,11 @@ public class HashMapV2<K, V> {
         this.threshold = tableSizeFor(initialCapacity);
     }
 
-    public HashMapV2(int initialCapacity) {
+    public HashMap(int initialCapacity) {
         this(initialCapacity, DEFAULT_LOAD_FACTOR);
     }
 
-    public HashMapV2() {
+    public HashMap() {
         this.loadFactor = DEFAULT_LOAD_FACTOR;
     }
 
