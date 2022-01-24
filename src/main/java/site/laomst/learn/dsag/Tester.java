@@ -295,4 +295,19 @@ public class Tester {
         System.out.println();
     }
 
+    static class Person{
+        String name;
+
+        public Person(String name) {
+            this.name = name;
+        }
+    }
+
+    @Test
+    public void treeMapTest() {
+        Map<Person, String> map = new TreeMap<>();
+        map.put(new Person("laomst"), "laomst");
+        System.out.println();
+    }
+
 }

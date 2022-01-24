@@ -20,19 +20,36 @@ public class AVLTreeMap<K, V> {
         }
     }
 
-    private static final Comparator<Object> DEFAULT_KEY_COMPARATOR = Comparator.comparingInt(Objects::hashCode);
+    @SuppressWarnings("unchecked")
+    private final Comparator<? super K> DEFAULT_KEY_COMPARATOR = (l, r) -> {
+//        if (l == null && r == null) {
+//            return 0;
+//        } else if (l == null) {
+//            return -1;
+//        } else if (r == null) {
+//            return 1;
+//        }
+        if (l == null || r == null) {
+            throw new NullPointerException("没有为AVLTreeMap提供 comparator，将使用key的自然顺序，此时key必须实现Comparable接口，同时key不能为空");
+        }
+        Comparable<? super K> lc = (Comparable<? super K>) l;
+        return lc.compareTo(r);
+    };
 
     private Node root;
 
-    private final Comparator<K> keyComparator;
+    private final Comparator<? super K> comparator;
 
     public AVLTreeMap(Comparator<K> keyComparator) {
-        this.keyComparator = keyComparator;
+        this.comparator = keyComparator;
     }
 
-    @SuppressWarnings({"unchecked"})
     public AVLTreeMap() {
-        this.keyComparator = (Comparator<K>) DEFAULT_KEY_COMPARATOR;
+        this.comparator = null;
+    }
+
+    private Comparator<? super K> keyComparator() {
+        return comparator == null ? DEFAULT_KEY_COMPARATOR : comparator;
     }
 
     public V get(K key) {
@@ -82,7 +99,7 @@ public class AVLTreeMap<K, V> {
      * @return
      */
     private Node delete(Node x, K key) {
-        int cmp = keyComparator.compare(key, key(x));
+        int cmp = keyComparator().compare(key, key(x));
         if (cmp < 0) {
             x.left = delete(x.left, key);
         } else if (cmp > 0) {
@@ -160,7 +177,7 @@ public class AVLTreeMap<K, V> {
         if (x == null) {
             return null;
         }
-        int cmp = keyComparator.compare(key, key(x));
+        int cmp = keyComparator().compare(key, key(x));
         if (cmp < 0) {
             return get(x.left, key);
         } else if (cmp > 0) {
@@ -174,7 +191,7 @@ public class AVLTreeMap<K, V> {
         if (x == null) {
             return new Node(key, value, 0, 1);
         }
-        int cmp = keyComparator.compare(key, key(x));
+        int cmp = keyComparator().compare(key, key(x));
         if (cmp < 0) {
             x.left = put(x.left, key, value);
         } else if (cmp > 0) {
