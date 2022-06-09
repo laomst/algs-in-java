@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.util.ArrayUtil;
 import site.laomst.learn.dsag.util.Best;
 
-public class QuickSort {
+public class LmQuickSort {
     @Best
     public static void sort(int[] a) {
         System.out.println("QuickSort.sort -> ");
@@ -42,6 +42,6 @@ public class QuickSort {
 
     @Test
     public void testSort() {
-        ArrayUtil.sortTest(QuickSort::sort);
+        ArrayUtil.sortTest(LmQuickSort::sort);
     }
 }

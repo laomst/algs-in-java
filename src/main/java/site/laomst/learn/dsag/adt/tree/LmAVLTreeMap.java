@@ -1,9 +1,8 @@
 package site.laomst.learn.dsag.adt.tree;
 
 import java.util.Comparator;
-import java.util.Objects;
 
-public class AVLTreeMap<K, V> {
+public class LmAVLTreeMap<K, V> {
     static class Node {
         final Object key;
         Object value;
@@ -40,11 +39,11 @@ public class AVLTreeMap<K, V> {
 
     private final Comparator<? super K> comparator;
 
-    public AVLTreeMap(Comparator<K> keyComparator) {
+    public LmAVLTreeMap(Comparator<K> keyComparator) {
         this.comparator = keyComparator;
     }
 
-    public AVLTreeMap() {
+    public LmAVLTreeMap() {
         this.comparator = null;
     }
 

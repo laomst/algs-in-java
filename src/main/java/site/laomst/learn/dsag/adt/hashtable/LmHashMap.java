@@ -3,11 +3,11 @@ package site.laomst.learn.dsag.adt.hashtable;
 import java.util.Objects;
 
 /**
- * @see HashMapLikeJDK 的重构版本，提高了代码的可读性，修改了扩容的逻辑，不再是根据 size 进行扩容，而是根据使用的桶的数量进行扩容，同时把table的初始化逻辑独立出来了
+ * @see LmHashMapLikeJDK 的重构版本，提高了代码的可读性，修改了扩容的逻辑，不再是根据 size 进行扩容，而是根据使用的桶的数量进行扩容，同时把table的初始化逻辑独立出来了
  * @param <K>
  * @param <V>
  */
-public class HashMap<K, V> {
+public class LmHashMap<K, V> {
 
     /**
      * 默认的初始容量
@@ -108,7 +108,7 @@ public class HashMap<K, V> {
      */
     final float loadFactor;
 
-    public HashMap(int initialCapacity, float loadFactor) {
+    public LmHashMap(int initialCapacity, float loadFactor) {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Illegal initial capacity: " + initialCapacity);
         }
@@ -119,11 +119,11 @@ public class HashMap<K, V> {
         this.threshold = tableSizeFor(initialCapacity);
     }
 
-    public HashMap(int initialCapacity) {
+    public LmHashMap(int initialCapacity) {
         this(initialCapacity, DEFAULT_LOAD_FACTOR);
     }
 
-    public HashMap() {
+    public LmHashMap() {
         this.loadFactor = DEFAULT_LOAD_FACTOR;
     }
 

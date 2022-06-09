@@ -1,6 +1,6 @@
 package site.laomst.learn.dsag.adt.list;
 
-public class LinkedList<E> {
+public class LmLinkedList<E> {
 
     private int size = 0;
 

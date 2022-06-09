@@ -3,9 +3,7 @@ package site.laomst.learn.dsag.algo.sort;
 import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.util.ArrayUtil;
 
-import java.util.Arrays;
-
-public class SelectionSort {
+public class LmSelectionSort {
     public static void sort(int[] a) {
         System.out.println("SelectionSort.sort -> ");
         if (a == null || a.length <= 1) {
@@ -24,6 +22,6 @@ public class SelectionSort {
 
     @Test
     public void sortTest() {
-        ArrayUtil.sortTest(SelectionSort::sort);
+        ArrayUtil.sortTest(LmSelectionSort::sort);
     }
 }

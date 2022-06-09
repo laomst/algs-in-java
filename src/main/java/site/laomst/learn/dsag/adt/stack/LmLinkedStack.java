@@ -2,7 +2,7 @@ package site.laomst.learn.dsag.adt.stack;
 
 import java.util.NoSuchElementException;
 
-public class LinkedStack<E> {
+public class LmLinkedStack<E> {
 
     private int size = 0;
 

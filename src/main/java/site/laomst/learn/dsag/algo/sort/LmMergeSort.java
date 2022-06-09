@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.util.ArrayUtil;
 import site.laomst.learn.dsag.util.Best;
 
-import java.util.Arrays;
-
-public class MergeSort {
+public class LmMergeSort {
     public static void sort(int[] a) {
         System.out.println("MergeSort.sort -> ");
         if (a == null || a.length <= 1) {
@@ -57,7 +55,7 @@ public class MergeSort {
 
     @Test
     public void sortTest() {
-        ArrayUtil.sortTest(MergeSort::sort);
+        ArrayUtil.sortTest(LmMergeSort::sort);
     }
 
     /**
@@ -123,6 +121,6 @@ public class MergeSort {
 
     @Test
     public void sort2Test() {
-        ArrayUtil.sortTest(MergeSort::sort2);
+        ArrayUtil.sortTest(LmMergeSort::sort2);
     }
 }

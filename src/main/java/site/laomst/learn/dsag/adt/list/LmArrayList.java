@@ -2,7 +2,7 @@ package site.laomst.learn.dsag.adt.list;
 
 import java.util.Arrays;
 
-public class ArrayList<E> {
+public class LmArrayList<E> {
 
     private static final int DEFAULT_CAPACITY = 10;
 
@@ -18,11 +18,11 @@ public class ArrayList<E> {
 
     private int size;
 
-    public ArrayList() {
+    public LmArrayList() {
         elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
     }
 
-    public ArrayList(int initCapacity) {
+    public LmArrayList(int initCapacity) {
         if (initCapacity < 0) {
             throw new IllegalArgumentException("The Array capacity must be greater than 0.");
         } else if (initCapacity == 0) {

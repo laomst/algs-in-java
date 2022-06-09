@@ -10,7 +10,7 @@ import java.util.Arrays;
  * {17, 3, 1, 9, 23, 78, 33};
  * 第一趟：step = 3, i = 3, j = 0
  */
-public class ShellSort {
+public class LmShellSort {
     public static void sort(int[] a) {
         if (a == null || a.length <= 1) {
             return;

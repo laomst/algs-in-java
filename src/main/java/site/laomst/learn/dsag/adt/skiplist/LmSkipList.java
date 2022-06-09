@@ -3,7 +3,7 @@ package site.laomst.learn.dsag.adt.skiplist;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-public class SkipList<E> {
+public class LmSkipList<E> {
     private static final float SKIPLIST_P = 0.5f;
     private static final int MAX_LEVEL = 16;
 
@@ -13,7 +13,7 @@ public class SkipList<E> {
 
     private final Comparator<E> itemComparator;
 
-    public SkipList(Comparator<E> itemComparator) {
+    public LmSkipList(Comparator<E> itemComparator) {
         if (itemComparator == null) {
             throw new NullPointerException("元素比较器不能为空");
         }

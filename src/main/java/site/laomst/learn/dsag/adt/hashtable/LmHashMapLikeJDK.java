@@ -7,7 +7,7 @@ import java.util.Objects;
  * @param <K>
  * @param <V>
  */
-public class HashMapLikeJDK<K, V> {
+public class LmHashMapLikeJDK<K, V> {
 
     /**
      * 默认的初始容量，必须是2的整次幂
@@ -105,7 +105,7 @@ public class HashMapLikeJDK<K, V> {
 
     final float loadFactor;
 
-    public HashMapLikeJDK(int initialCapacity, float loadFactor) {
+    public LmHashMapLikeJDK(int initialCapacity, float loadFactor) {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Illegal initial capacity: " + initialCapacity);
         }
@@ -116,11 +116,11 @@ public class HashMapLikeJDK<K, V> {
         this.threshold = tableSizeFor(initialCapacity);
     }
 
-    public HashMapLikeJDK(int initialCapacity) {
+    public LmHashMapLikeJDK(int initialCapacity) {
         this(initialCapacity, DEFAULT_LOAD_FACTOR);
     }
 
-    public HashMapLikeJDK() {
+    public LmHashMapLikeJDK() {
         this.loadFactor = DEFAULT_LOAD_FACTOR;
     }
 

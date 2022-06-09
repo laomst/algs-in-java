@@ -2,7 +2,7 @@ package site.laomst.learn.dsag.adt.stack;
 
 import java.util.Arrays;
 
-public class ArrayStack<E> {
+public class LmArrayStack<E> {
     private static final int DEFAULT_CAPACITY = 10;
 
     private static final Object[] EMPTY_ELEMENTDATA = {};
@@ -15,11 +15,11 @@ public class ArrayStack<E> {
 
     private int size;
 
-    public ArrayStack() {
+    public LmArrayStack() {
         elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
     }
 
-    public ArrayStack(int initCapacity) {
+    public LmArrayStack(int initCapacity) {
         if (initCapacity < 0) {
             throw new IllegalArgumentException("The Array capacity must be greater than 0.");
         } else if (initCapacity == 0) {

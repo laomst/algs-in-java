@@ -2,14 +2,14 @@ package site.laomst.learn.dsag.adt.queue;
 
 import java.util.NoSuchElementException;
 
-public class CircularArrayQueue<E> {
+public class LmCircularArrayQueue<E> {
     private Object[] elementData;
 
     private int head = 0;
     private int tail = 0;
     private int size = 0;
 
-    public CircularArrayQueue(int initCapacity) {
+    public LmCircularArrayQueue(int initCapacity) {
         if (initCapacity < 0) {
             throw new IllegalArgumentException("The CircularArrayQueue capacity must be greater than 0.");
         }

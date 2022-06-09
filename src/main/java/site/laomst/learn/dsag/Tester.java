@@ -1,16 +1,16 @@
 package site.laomst.learn.dsag;
 
 import org.junit.jupiter.api.Test;
-import site.laomst.learn.dsag.adt.hashtable.HashMapLikeJDK;
-import site.laomst.learn.dsag.adt.list.ArrayList;
-import site.laomst.learn.dsag.adt.list.LinkedList;
-import site.laomst.learn.dsag.adt.queue.ArrayQueue;
-import site.laomst.learn.dsag.adt.queue.CircularArrayQueue;
-import site.laomst.learn.dsag.adt.queue.LinkedQueue;
-import site.laomst.learn.dsag.adt.skiplist.SkipList;
+import site.laomst.learn.dsag.adt.hashtable.LmHashMapLikeJDK;
+import site.laomst.learn.dsag.adt.list.LmArrayList;
+import site.laomst.learn.dsag.adt.list.LmLinkedList;
+import site.laomst.learn.dsag.adt.queue.LmArrayQueue;
+import site.laomst.learn.dsag.adt.queue.LmCircularArrayQueue;
+import site.laomst.learn.dsag.adt.queue.LmLinkedQueue;
+import site.laomst.learn.dsag.adt.skiplist.LmSkipList;
 import site.laomst.learn.dsag.adt.skiplist.WZSkipList;
-import site.laomst.learn.dsag.adt.stack.ArrayStack;
-import site.laomst.learn.dsag.adt.stack.LinkedStack;
+import site.laomst.learn.dsag.adt.stack.LmArrayStack;
+import site.laomst.learn.dsag.adt.stack.LmLinkedStack;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -20,7 +20,7 @@ public class Tester {
 
     @Test
     public void arrayTest() {
-        ArrayList<String> stringArray = new ArrayList<>();
+        LmArrayList<String> stringArray = new LmArrayList<>();
         for (int i = 0; i < 10; i++) {
             stringArray.add(i + "");
         }
@@ -59,7 +59,7 @@ public class Tester {
 
     @Test
     public void linkedListTest() {
-        LinkedList<String> list = new LinkedList<>();
+        LmLinkedList<String> list = new LmLinkedList<>();
         list.add("0");
         list.add("1");
         list.add("2");
@@ -71,23 +71,23 @@ public class Tester {
 
     @Test
     public void arrayStackTest() {
-        ArrayStack<Integer> arrayStack = new ArrayStack<>();
-        arrayStack.push(1);
-        arrayStack.push(2);
-        arrayStack.push(3);
-        arrayStack.push(4);
-        arrayStack.push(5);
-        arrayStack.pop();
-        arrayStack.pop();
-        arrayStack.pop();
-        arrayStack.push(10086);
-        arrayStack.pop();
+        LmArrayStack<Integer> lmArrayStack = new LmArrayStack<>();
+        lmArrayStack.push(1);
+        lmArrayStack.push(2);
+        lmArrayStack.push(3);
+        lmArrayStack.push(4);
+        lmArrayStack.push(5);
+        lmArrayStack.pop();
+        lmArrayStack.pop();
+        lmArrayStack.pop();
+        lmArrayStack.push(10086);
+        lmArrayStack.pop();
         System.out.println();
     }
 
     @Test
     public void LinkedStackTest() {
-        LinkedStack<Integer> arrayStack = new LinkedStack<>();
+        LmLinkedStack<Integer> arrayStack = new LmLinkedStack<>();
         arrayStack.push(1);
         arrayStack.push(2);
         arrayStack.push(3);
@@ -103,7 +103,7 @@ public class Tester {
 
     @Test
     public void arrayQueue() {
-        ArrayQueue<Integer> arrayStack = new ArrayQueue<>();
+        LmArrayQueue<Integer> arrayStack = new LmArrayQueue<>();
         arrayStack.enqueue(1);
         String str1 = arrayStack.printAll();
         arrayStack.enqueue(2);
@@ -149,23 +149,23 @@ public class Tester {
 
     @Test
     public void linkedQueueTest() {
-        LinkedQueue<Integer> linkedQueue = new LinkedQueue<>();
-        linkedQueue.enqueue(1);
-        linkedQueue.enqueue(2);
-        linkedQueue.enqueue(3);
-        linkedQueue.enqueue(4);
-        linkedQueue.enqueue(5);
-        linkedQueue.dequeue();
-        linkedQueue.dequeue();
-        linkedQueue.dequeue();
-        linkedQueue.enqueue(6);
-        linkedQueue.enqueue(7);
-        linkedQueue.dequeue();
+        LmLinkedQueue<Integer> lmLinkedQueue = new LmLinkedQueue<>();
+        lmLinkedQueue.enqueue(1);
+        lmLinkedQueue.enqueue(2);
+        lmLinkedQueue.enqueue(3);
+        lmLinkedQueue.enqueue(4);
+        lmLinkedQueue.enqueue(5);
+        lmLinkedQueue.dequeue();
+        lmLinkedQueue.dequeue();
+        lmLinkedQueue.dequeue();
+        lmLinkedQueue.enqueue(6);
+        lmLinkedQueue.enqueue(7);
+        lmLinkedQueue.dequeue();
     }
 
     @Test
     public void circularArrayQueueTest() {
-        CircularArrayQueue<Integer> arrayQueue = new CircularArrayQueue<>(10);
+        LmCircularArrayQueue<Integer> arrayQueue = new LmCircularArrayQueue<>(10);
         arrayQueue.enqueue(1);
         arrayQueue.enqueue(2);
         arrayQueue.enqueue(3);
@@ -204,15 +204,15 @@ public class Tester {
 
     @Test
     public void skipListTest() {
-        SkipList<Integer> skipList = new SkipList<>(Integer::compareTo);
-        skipList.insert(1);
-        skipList.insert(2);
-        skipList.insert(3);
-        skipList.insert(-1);
-        skipList.insert(4);
-        skipList.insert(6);
-        skipList.insert(5);
-        skipList.printAll();
+        LmSkipList<Integer> lmSkipList = new LmSkipList<>(Integer::compareTo);
+        lmSkipList.insert(1);
+        lmSkipList.insert(2);
+        lmSkipList.insert(3);
+        lmSkipList.insert(-1);
+        lmSkipList.insert(4);
+        lmSkipList.insert(6);
+        lmSkipList.insert(5);
+        lmSkipList.printAll();
     }
 
     @Test
@@ -268,7 +268,7 @@ public class Tester {
 
     @Test
     public void HashMapV1Test() {
-        HashMapLikeJDK<String, String> hashMap = new HashMapLikeJDK<>(1);
+        LmHashMapLikeJDK<String, String> hashMap = new LmHashMapLikeJDK<>(1);
         hashMap.put("1", "1");
         hashMap.put("2", "1");
         hashMap.put("3", "1");

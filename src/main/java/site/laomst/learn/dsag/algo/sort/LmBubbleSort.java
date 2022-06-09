@@ -3,9 +3,7 @@ package site.laomst.learn.dsag.algo.sort;
 import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.util.ArrayUtil;
 
-import java.util.Arrays;
-
-public class BubbleSort {
+public class LmBubbleSort {
 
     /**
      * 最初的实现，没有任何优化
@@ -28,7 +26,7 @@ public class BubbleSort {
 
     @Test
     public void sortTest() {
-        ArrayUtil.sortTest(BubbleSort::sort, new int[]{1, 1, 1, 1, 1});
+        ArrayUtil.sortTest(LmBubbleSort::sort, new int[]{1, 1, 1, 1, 1});
     }
 
     /**
@@ -60,7 +58,7 @@ public class BubbleSort {
 
     @Test
     public void sort2Test() {
-        ArrayUtil.sortTest(BubbleSort::sort2);
+        ArrayUtil.sortTest(LmBubbleSort::sort2);
     }
 
     /**
@@ -102,7 +100,7 @@ public class BubbleSort {
 
     @Test
     public void sort3Test() {
-        ArrayUtil.sortTest(BubbleSort::sort3, new int[]{1, 2, 3, 5, 1});
+        ArrayUtil.sortTest(LmBubbleSort::sort3, new int[]{1, 2, 3, 5, 1});
 //        ArrayUtil.sortTest(BubbleSort::sort3);
     }
 
@@ -128,6 +126,6 @@ public class BubbleSort {
 
     @Test
     public void sortBubbleDownTest() {
-        ArrayUtil.sortTest(BubbleSort::sortBubbleDown);
+        ArrayUtil.sortTest(LmBubbleSort::sortBubbleDown);
     }
 }

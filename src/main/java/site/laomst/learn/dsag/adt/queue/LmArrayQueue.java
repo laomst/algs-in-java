@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * 顺序队列，入队的时候，可能会进行清理或者扩容操作
  * @param <E>
  */
-public class ArrayQueue<E> {
+public class LmArrayQueue<E> {
     private static final int DEFAULT_CAPACITY = 10;
 
     private static final Object[] EMPTY_ELEMENTDATA = {};
@@ -21,11 +21,11 @@ public class ArrayQueue<E> {
     private int head = 0;
     private Object[] elementData;
 
-    public ArrayQueue() {
+    public LmArrayQueue() {
         elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
     }
 
-    public ArrayQueue(int initCapacity) {
+    public LmArrayQueue(int initCapacity) {
         if (initCapacity < 0) {
             throw new IllegalArgumentException("The ArrayQueue capacity must be greater than 0.");
         } else if (initCapacity == 0) {

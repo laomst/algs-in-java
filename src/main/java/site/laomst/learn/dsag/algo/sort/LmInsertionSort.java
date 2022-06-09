@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 import site.laomst.learn.dsag.util.ArrayUtil;
 import site.laomst.learn.dsag.util.Best;
 
-import java.util.Arrays;
-
-public class InsertionSort {
+public class LmInsertionSort {
 
     @Best
     public static void sort(int[] a) {
@@ -34,7 +32,7 @@ public class InsertionSort {
 
     @Test
     public void sortTest() {
-        ArrayUtil.sortTest(InsertionSort::sort);
+        ArrayUtil.sortTest(LmInsertionSort::sort);
     }
 
     /**
@@ -69,7 +67,7 @@ public class InsertionSort {
 
     @Test
     public void sort2Test() {
-        ArrayUtil.sortTest(InsertionSort::sort2);
+        ArrayUtil.sortTest(LmInsertionSort::sort2);
     }
 
     /**
@@ -101,7 +99,7 @@ public class InsertionSort {
 
     @Test
     public void sort3Test() {
-        ArrayUtil.sortTest(InsertionSort::sort3);
+        ArrayUtil.sortTest(LmInsertionSort::sort3);
     }
 
 }

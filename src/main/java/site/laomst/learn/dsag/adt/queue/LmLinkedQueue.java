@@ -2,7 +2,7 @@ package site.laomst.learn.dsag.adt.queue;
 
 import java.util.NoSuchElementException;
 
-public class LinkedQueue<E> {
+public class LmLinkedQueue<E> {
 
     private int size = 0;
 

@@ -60,7 +60,7 @@ public class RedBlackTreeMap<K, V> {
 
     private static final Comparator<Object> DEFAULT_KEY_COMPARATOR = Comparator.comparingInt(Objects::hashCode);
 
-    private AVLTreeMap.Node root;
+    private LmAVLTreeMap.Node root;
 
     private final Comparator<K> keyComparator;
 
