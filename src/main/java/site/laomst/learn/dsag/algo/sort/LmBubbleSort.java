@@ -41,16 +41,16 @@ public class LmBubbleSort {
         }
         for (int i = 0; i < a.length; i++) {
             // 是否可以提前退出的标志位
-            boolean flag = false;
+            boolean continueFlag = false;
             for (int j = 0; j < a.length - 1 - i; j++) {
                 if (a[j] > a[j + 1]) {
                     ArrayUtil.swap(a, j, j + 1);
                     // 本次冒泡有数据交换
-                    flag = true;
+                    continueFlag = true;
                 }
             }
             // 如果本次冒泡没有发生数据交换，那么排序就可以结束了
-            if (!flag) {
+            if (!continueFlag) {
                 break;
             }
         }
@@ -80,18 +80,18 @@ public class LmBubbleSort {
         int sortBorder = a.length - 1;
         for (int i = 0; i < a.length - 1; i++) {
             // 提前退出的标志位
-            boolean flag = false;
+            boolean continueFlag = false;
             for (int j = 0; j < sortBorder; j++) {
                 if (a[j] > a[j + 1]) {
                     ArrayUtil.swap(a, j, j + 1);
                     // 此次冒泡发生了数据交换
-                    flag = true;
+                    continueFlag = true;
                     // 上次交换的位置
                     lastExchangeIndex = j;
                 }
             }
             sortBorder = lastExchangeIndex;
-            if (!flag) {
+            if (!continueFlag) {
                 // 本次冒泡没有发生数据交换，那么排序就可以结束了
                 break;
             }
@@ -100,8 +100,8 @@ public class LmBubbleSort {
 
     @Test
     public void sort3Test() {
-        ArrayUtil.sortTest(LmBubbleSort::sort3, new int[]{1, 2, 3, 5, 1});
-//        ArrayUtil.sortTest(BubbleSort::sort3);
+//        ArrayUtil.sortTest(LmBubbleSort::sort3, new int[]{1, 2, 3, 5, 1});
+        ArrayUtil.sortTest(LmBubbleSort::sort3);
     }
 
     /**
@@ -118,7 +118,7 @@ public class LmBubbleSort {
         for (int i = 0; i < a.length; i++) {
             for (int j = i + 1; j < a.length; j++) {
                 if (a[i] > a[j]) {
-                    ArrayUtil.swap(a, j, j + 1);
+                    ArrayUtil.swap(a, i, j);
                 }
             }
         }
